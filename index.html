@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Qumulo · Product Line & Competitive Landscape</title>
+<style>
+  /* ── Qumulo palette ────────────────────────────────────────── */
+  :root {
+    --navy-deepest: #050b18;
+    --navy-deep:    #081224;
+    --navy:         #10203c;
+    --navy-mid:     #1c325c;
+    --navy-border:  #2a3e5c;
+    --navy-card:    #14253f;
+    --cyan:         #1ab8db;
+    --cyan-bright:  #5ad2eb;
+    --cyan-deep:    #0e7fa0;
+    --cyan-glow:    rgba(26, 184, 219, 0.18);
+    --text:         #f0f6ff;
+    --text-soft:    #c1cfe0;
+    --text-mute:    #8595a6;
+    --text-dim:     #5d6c80;
+    --good:         #2dd47e;
+    --warn:         #ff9d4a;
+    --bad:          #f06868;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--navy-deepest); }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: var(--text);
+    line-height: 1.55;
+    overflow-x: hidden;
+    background:
+      radial-gradient(ellipse 1200px 600px at 80% -200px, rgba(26,184,219,0.10), transparent 60%),
+      radial-gradient(ellipse 900px 500px at 10% 30%, rgba(26,184,219,0.05), transparent 60%),
+      var(--navy-deepest);
+    min-height: 100vh;
+  }
+
+  /* ── Layout ────────────────────────────────────────────────── */
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+
+  /* ── Top bar / brand ──────────────────────────────────────── */
+  .topbar {
+    padding: 28px 0;
+    border-bottom: 1px solid var(--navy-border);
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(5,11,24,0.92);
+    backdrop-filter: blur(12px);
+  }
+  .topbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand-dot {
+    width: 14px; height: 14px; background: var(--cyan);
+    box-shadow: 0 0 16px var(--cyan-glow);
+  }
+  .brand-name { font-weight: 700; font-size: 20px; letter-spacing: -0.01em; }
+  .brand-sep { color: var(--text-dim); margin: 0 4px; }
+  .brand-sub { color: var(--text-mute); font-size: 14px; letter-spacing: 0.02em; }
+
+  /* ── Hero ─────────────────────────────────────────────────── */
+  .hero { padding: 80px 0 60px; position: relative; }
+  .eyebrow {
+    color: var(--cyan);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    max-width: 900px;
+    margin-bottom: 20px;
+  }
+  h1 .accent { color: var(--cyan); }
+  .hero-sub {
+    color: var(--text-soft);
+    font-size: 17px;
+    max-width: 720px;
+    line-height: 1.6;
+  }
+
+  /* ── Section heading ──────────────────────────────────────── */
+  .section { padding: 60px 0; }
+  .section-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 24px; flex-wrap: wrap;
+    margin-bottom: 36px; padding-bottom: 16px;
+    border-bottom: 1px solid var(--navy-border);
+  }
+  .section-head h2 {
+    font-size: 28px; font-weight: 700; letter-spacing: -0.01em;
+  }
+  .section-num {
+    color: var(--cyan); font-family: "SF Mono", Menlo, monospace;
+    font-size: 12px; letter-spacing: 0.2em; margin-right: 16px;
+  }
+  .section-tag {
+    color: var(--text-mute); font-size: 14px; max-width: 480px;
+  }
+
+  /* ── Product stack visualization ──────────────────────────── */
+  .stack {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 48px;
+  }
+  @media (max-width: 900px) { .stack { grid-template-columns: 1fr; } }
+
+  .stack-panel {
+    background: var(--navy);
+    border: 1px solid var(--navy-border);
+    border-radius: 12px;
+    padding: 28px;
+  }
+  .stack-panel h3 {
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--text-mute); margin-bottom: 4px;
+  }
+  .stack-panel h4 {
+    font-size: 20px; font-weight: 700; margin-bottom: 20px;
+    letter-spacing: -0.01em;
+  }
+
+  .layer {
+    display: flex; align-items: center; gap: 16px;
+    padding: 12px 16px; margin-bottom: 6px;
+    background: var(--navy-card);
+    border: 1px solid var(--navy-border);
+    border-radius: 6px;
+    cursor: default;
+    transition: all 0.2s ease;
+  }
+  .layer:hover {
+    border-color: var(--cyan-deep);
+    background: rgba(26,184,219,0.06);
+    transform: translateX(2px);
+  }
+  .layer-name {
+    flex-shrink: 0; width: 180px;
+    font-weight: 600; font-size: 14px;
+  }
+  .layer-desc {
+    color: var(--text-mute); font-size: 13px;
+  }
+  .layer.refinery {
+    border-left: 3px solid var(--cyan);
+    background: rgba(26,184,219,0.06);
+  }
+  .layer.refinery .layer-name { color: var(--cyan-bright); }
+
+  /* Product cards (horizontal portfolio) */
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .product-card {
+    background: var(--navy);
+    border: 1px solid var(--navy-border);
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+    transition: all 0.2s ease;
+  }
+  .product-card:hover {
+    border-color: var(--cyan-deep);
+    transform: translateY(-2px);
+  }
+  .product-card .badge {
+    position: absolute; top: 16px; right: 16px;
+    font-family: "SF Mono", Menlo, monospace;
+    font-size: 10px; letter-spacing: 0.1em;
+    color: var(--cyan); opacity: 0.7;
+  }
+  .product-card h5 {
+    font-size: 15px; font-weight: 700; margin-bottom: 4px;
+  }
+  .product-card .price {
+    font-size: 11px; color: var(--cyan); margin-bottom: 10px;
+    font-family: "SF Mono", Menlo, monospace; letter-spacing: 0.05em;
+  }
+  .product-card p {
+    font-size: 13px; color: var(--text-mute);
+    line-height: 1.5;
+  }
+
+  /* ── Competitor grid ──────────────────────────────────────── */
+  .comp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+    margin-bottom: 40px;
+  }
+  .comp-card {
+    background: var(--navy);
+    border: 1px solid var(--navy-border);
+    border-radius: 10px;
+    padding: 20px 18px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+    overflow: hidden;
+  }
+  .comp-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, var(--cyan-glow) 0%, transparent 50%);
+    opacity: 0; transition: opacity 0.25s ease;
+  }
+  .comp-card:hover {
+    border-color: var(--cyan);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  }
+  .comp-card:hover::before { opacity: 1; }
+  .comp-card.active {
+    border-color: var(--cyan);
+    background: linear-gradient(135deg, rgba(26,184,219,0.10), var(--navy));
+  }
+  .comp-card.active::after {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px; background: var(--cyan);
+  }
+  .comp-card h5 {
+    font-size: 17px; font-weight: 700;
+    margin-bottom: 6px; position: relative;
+  }
+  .comp-card .comp-tag {
+    font-family: "SF Mono", Menlo, monospace;
+    font-size: 10px; letter-spacing: 0.1em;
+    color: var(--text-dim); text-transform: uppercase;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .comp-card .comp-snip {
+    font-size: 12.5px; color: var(--text-mute);
+    line-height: 1.5;
+    position: relative;
+  }
+
+  /* ── Comparison panel ─────────────────────────────────────── */
+  .panel-wrap {
+    background: linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
+    border: 1px solid var(--navy-border);
+    border-radius: 14px;
+    overflow: hidden;
+    min-height: 480px;
+    position: sticky; top: 100px;
+  }
+  .panel-head {
+    padding: 28px 32px 0;
+    border-bottom: 1px solid var(--navy-border);
+  }
+  .panel-eyebrow {
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 11px;
+    margin-bottom: 8px;
+  }
+  .panel-title {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+  }
+  .panel-meta {
+    color: var(--text-mute);
+    font-size: 13px;
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+  .tabs {
+    display: flex; gap: 4px;
+    margin-bottom: -1px;
+  }
+  .tab {
+    padding: 12px 20px;
+    font-size: 13px; font-weight: 600;
+    color: var(--text-mute);
+    background: transparent;
+    border: 1px solid transparent;
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .tab:hover { color: var(--text-soft); }
+  .tab.active {
+    background: var(--navy-deep);
+    border-color: var(--navy-border);
+    color: var(--cyan);
+  }
+  .tab-icon {
+    display: inline-block;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+  .tab[data-tab="qumulo"] .tab-icon { background: var(--good); }
+  .tab[data-tab="them"] .tab-icon { background: var(--warn); }
+
+  .panel-body {
+    padding: 32px;
+    background: var(--navy-deep);
+  }
+  .point {
+    margin-bottom: 22px;
+    padding-left: 20px;
+    border-left: 2px solid var(--navy-border);
+    transition: border-color 0.2s ease;
+  }
+  .point:hover { border-left-color: var(--cyan); }
+  .point h6 {
+    font-size: 14px; font-weight: 700;
+    color: var(--text); margin-bottom: 4px;
+    letter-spacing: -0.005em;
+  }
+  .point p {
+    font-size: 13.5px;
+    color: var(--text-soft);
+    line-height: 1.6;
+  }
+
+  /* Two-column comparison layout */
+  .compare-wrap {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 28px;
+    margin-top: 36px;
+  }
+  @media (max-width: 980px) { .compare-wrap { grid-template-columns: 1fr; } .panel-wrap { position: static; } }
+
+  /* ── Footer ───────────────────────────────────────────────── */
+  footer {
+    padding: 60px 0 80px;
+    border-top: 1px solid var(--navy-border);
+    margin-top: 80px;
+  }
+  footer p {
+    color: var(--text-dim);
+    font-size: 12px;
+    line-height: 1.6;
+    max-width: 720px;
+  }
+  footer .foot-row {
+    display: flex; justify-content: space-between;
+    align-items: center; gap: 24px; flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  footer .foot-brand {
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 700; color: var(--text-soft);
+  }
+  footer .foot-dot {
+    width: 10px; height: 10px; background: var(--cyan);
+  }
+
+  /* Hint */
+  .hint {
+    text-align: center;
+    color: var(--text-mute);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 16px 0 24px;
+  }
+  .hint .arrow {
+    color: var(--cyan);
+    margin: 0 6px;
+  }
+
+  /* Animation */
+  .fade-in { animation: fadeIn 0.35s ease; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── TOP BAR ─────────────────────────────────────────────── -->
+<div class="topbar">
+  <div class="container topbar-inner">
+    <div class="brand">
+      <div class="brand-dot"></div>
+      <span class="brand-name">Qumulo</span>
+      <span class="brand-sep">|</span>
+      <span class="brand-sub">Product Line &amp; Competitive Landscape</span>
+    </div>
+    <div class="brand-sub">Internal · May 2026</div>
+  </div>
+</div>
+
+<!-- ── HERO ───────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="container">
+    <div class="eyebrow">Where Qumulo plays, and against whom</div>
+    <h1>One data plane for unstructured data — across <span class="accent">on&#8209;prem, cloud, sovereign, and edge</span>.</h1>
+    <p class="hero-sub">
+      The portfolio anchors on a single scale-out file system with multi-protocol access (NFS, SMB, S3),
+      extends globally through a cloud data fabric, and is now layering an AI-native data refinery on top.
+      Below: the stack, the horizontal product line, and ten competitors — with the case both ways.
+    </p>
+  </div>
+</section>
+
+<!-- ── SECTION 1 · QUMULO PRODUCT LINE ───────────────────── -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2><span class="section-num">01</span>The Qumulo Product Line</h2>
+      <p class="section-tag">Six-layer stack on a single substrate · horizontal products that expand TAM upward and outward.</p>
+    </div>
+
+    <!-- The Stack -->
+    <div class="stack">
+      <div class="stack-panel">
+        <h3>The Stack</h3>
+        <h4>Six components. One substrate.</h4>
+        <div class="layer"><span class="layer-name">NeuralSearch</span><span class="layer-desc">SQL, REST, vector &amp; MCP retrieval</span></div>
+        <div class="layer refinery"><span class="layer-name">The Refinery</span><span class="layer-desc">AI metadata, lineage, embeddings — file-resident</span></div>
+        <div class="layer"><span class="layer-name">NeuralProtect</span><span class="layer-desc">Ransomware &amp; threat detection on the data plane</span></div>
+        <div class="layer"><span class="layer-name">NeuralCache</span><span class="layer-desc">Hot-tier acceleration for GPU pipelines</span></div>
+        <div class="layer"><span class="layer-name">Cloud Data Fabric</span><span class="layer-desc">Single namespace across on-prem, cloud &amp; edge</span></div>
+        <div class="layer"><span class="layer-name">Qumulo Core</span><span class="layer-desc">Distributed scale-out file system · multi-protocol</span></div>
+      </div>
+
+      <div class="stack-panel">
+        <h3>What it does differently</h3>
+        <h4>Three product principles.</h4>
+        <div class="layer">
+          <div>
+            <div class="layer-name" style="width:auto;color:var(--cyan-bright);margin-bottom:4px;">01 — Meaning bound to bytes</div>
+            <div class="layer-desc">Tags, summaries, transcripts, entities, embeddings written as extended attributes on the file. Not a sidecar database that rots when copied or moved.</div>
+          </div>
+        </div>
+        <div class="layer">
+          <div>
+            <div class="layer-name" style="width:auto;color:var(--cyan-bright);margin-bottom:4px;">02 — Continuous, not one-shot</div>
+            <div class="layer-desc">Whisper v2→v3, Llama-3→4 — The Refinery re-runs as models improve, so the semantic layer refreshes automatically rather than going stale.</div>
+          </div>
+        </div>
+        <div class="layer">
+          <div>
+            <div class="layer-name" style="width:auto;color:var(--cyan-bright);margin-bottom:4px;">03 — Provenance on every operation</div>
+            <div class="layer-desc">Model, version, confidence, classification, user lineage — logged per enrichment. Foundation for the eligibility-at-access control plane (federal, M&amp;E, life sciences).</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Horizontal product portfolio -->
+    <h3 style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-mute);margin-bottom:14px;">Portfolio · Editions, Cloud, &amp; TAM Expansion</h3>
+    <div class="product-grid">
+
+      <div class="product-card">
+        <div class="badge">FLAGSHIP</div>
+        <h5>ANQ Enterprise</h5>
+        <div class="price">$50/TB/mo · 35% uplift over base</div>
+        <p>On-prem / hybrid edition. All-features bundle plus premium support. The classic Qumulo appliance + software footprint at enterprise tier.</p>
+      </div>
+
+      <div class="product-card">
+        <div class="badge">CLOUD</div>
+        <h5>CNQ Enterprise</h5>
+        <div class="price">$36/TB/mo · 50% uplift over base</div>
+        <p>Cloud-Native Qumulo on AWS, Azure, OCI. Hyperscaler-economics file system that re-uses object storage underneath. +134% YoY ARR.</p>
+      </div>
+
+      <div class="product-card">
+        <div class="badge">ARCHIVE</div>
+        <h5>ANQ / CNQ-Frozen</h5>
+        <div class="price">Archive tier</div>
+        <p>Monetizes dark / archival data at low cost-per-TB while keeping it in the same namespace. TAM-expansion play into colder data sets.</p>
+      </div>
+
+      <div class="product-card">
+        <div class="badge">OBJECT</div>
+        <h5>Object Accelerator</h5>
+        <div class="price">S3 · ADLS Gen2 · GCS</div>
+        <p>Tiers cold data into native cloud object stores while keeping it addressable through Qumulo's file namespace. Consistent across cloud providers.</p>
+      </div>
+
+      <div class="product-card">
+        <div class="badge">MOBILITY</div>
+        <h5>Cloud Bridge</h5>
+        <div class="price">On-prem ⇄ Cloud</div>
+        <p>Bridges existing on-prem clusters to CNQ in the cloud — answer to "new nodes cost 200%+ more" customer pressure. Migration without forklift.</p>
+      </div>
+
+      <div class="product-card">
+        <div class="badge">AI</div>
+        <h5>GPU Hunting</h5>
+        <div class="price">Multi-region · Multi-cloud</div>
+        <p>Multi-region cloud GPU optimization — moves the data namespace toward wherever the next GPU pool opens up (Azure US-East, OCI US-East, etc.).</p>
+      </div>
+
+      <div class="product-card">
+        <div class="badge">AI</div>
+        <h5>Cloud AI Accelerator</h5>
+        <div class="price">Stateless · Scalable</div>
+        <p>Stateless, scalable cloud instance that connects Qumulo data to AI compute on demand. Bridges training/inference workloads to the namespace.</p>
+      </div>
+
+      <div class="product-card">
+        <div class="badge">DR</div>
+        <h5>NeuralSync</h5>
+        <div class="price">Zero RPO / RTO claim</div>
+        <p>Cross-site replication with strong consistency, positioned for DR and active-active distributed scenarios spanning continents.</p>
+      </div>
+
+      <div class="product-card">
+        <div class="badge">PLATFORM</div>
+        <h5>ARM &amp; DPU</h5>
+        <div class="price">Power/cost optimization</div>
+        <p>ARM CPU and DPU node support — drops compute power per PB while maintaining throughput; expands TAM in dense, power-constrained DCs.</p>
+      </div>
+
+      <div class="product-card">
+        <div class="badge">ANALYTICS</div>
+        <h5>Databricks / Snowflake</h5>
+        <div class="price">Spark ETL · Unity Catalog</div>
+        <p>Direct integrations so Qumulo becomes the unstructured-data source for the lakehouse — feeds Gold tables, no copy required.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 2 · COMPETITIVE LANDSCAPE ─────────────────── -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2><span class="section-num">02</span>The Competitive Landscape</h2>
+      <p class="section-tag">Click a card to see the case both ways — where Qumulo wins, and where the competitor does.</p>
+    </div>
+
+    <div class="hint">Tap any card &nbsp;<span class="arrow">→</span>&nbsp; see Qumulo's edge AND theirs</div>
+
+    <div class="compare-wrap">
+      <!-- LEFT: Competitor grid -->
+      <div class="comp-grid" id="comp-grid">
+        <!-- Cards injected by JS -->
+      </div>
+
+      <!-- RIGHT: Sticky comparison panel -->
+      <div class="panel-wrap">
+        <div class="panel-head">
+          <div class="panel-eyebrow" id="panel-eyebrow">Select a competitor</div>
+          <div class="panel-title" id="panel-title">Competitive analysis</div>
+          <div class="panel-meta" id="panel-meta">Tap any of the cards on the left to load a head-to-head comparison.</div>
+          <div class="tabs">
+            <button class="tab active" data-tab="qumulo"><span class="tab-icon"></span>Qumulo's edge</button>
+            <button class="tab" data-tab="them"><span class="tab-icon"></span>Their edge over Qumulo</button>
+          </div>
+        </div>
+        <div class="panel-body" id="panel-body">
+          <div class="point">
+            <h6>Pick a competitor to begin</h6>
+            <p>The comparison renders here as a two-tab view: where Qumulo wins, and where they win. Both tabs are honest — there is no competitor against whom Qumulo wins every dimension, and no competitor against whom Qumulo loses every dimension.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────────── -->
+<footer>
+  <div class="container">
+    <div class="foot-row">
+      <div class="foot-brand"><div class="foot-dot"></div>Qumulo · Competitive Landscape</div>
+      <div class="brand-sub">Built from internal product decks + public competitor positioning · May 2026</div>
+    </div>
+    <p>
+      Synthesis derived from Qumulo product / strategy decks (BoD May FY27, Refinery deck, NVIDIA strategy work, Strategic Initiatives review)
+      and current public positioning of competitors. Pricing reflects ANQ Enterprise $50/TB/mo and CNQ Enterprise $36/TB/mo from the FY27 packaging slide.
+      "Their edge" sections are intentionally written from each competitor's strongest case — useful in deal defense, not as endorsement.
+    </p>
+  </div>
+</footer>
+
+<!-- ── DATA + INTERACTION ────────────────────────────────── -->
+<script>
+const COMPETITORS = [
+  {
+    id: 'netapp',
+    name: 'NetApp',
+    tag: 'AFX · ONTAP · AI Data Engine',
+    snip: 'The incumbent. Disaggregated ONTAP and the AIDP-blessed AI Data Engine. Cloud-native in all three hyperscalers.',
+    qumulo: [
+      ['Cloud-native economics, not just cloud-available',
+       'CNQ runs natively on hyperscaler object storage as substrate — different cost curve than ONTAP-on-VMs. Qumulo customers report ~76% lower COGS per 10PB on the cloud TCO comparison vs traditional enterprise file.'],
+      ['Built scale-out from day one',
+       'Qumulo is a single distributed file system, not a clustered version of a controller-pair architecture. No 2-node failover domains, no scale-up legacy. 10PB+ deployments behave like 100TB deployments.'],
+      ['Simpler operating model',
+       'No SVMs, no aggregates, no FlexGroup mental model. One filesystem, one namespace, real-time analytics on every operation. NetApp ONTAP is feature-rich but the operational surface is significantly heavier.'],
+      ['File-first for media, surveillance, genomics',
+       'Where Qumulo lives — M&E (Disney, WBD), federal/PACS, geospatial, life sciences — NetApp historically optimized for general-purpose enterprise NAS + SAN. Qumulo wins the workflow fit even when NetApp wins the procurement.']
+    ],
+    them: [
+      ['AIDP reference design partner',
+       'NetApp AFX + AI Data Engine is a named NVIDIA AIDP reference design (Oct 2025). Qumulo is not yet on the AIDP partner list — that gap matters at enterprise procurement.'],
+      ['The only enterprise storage natively embedded in AWS, Azure, GCP',
+       'NetApp ANF, FSx for ONTAP, and Google Cloud NetApp Volumes are first-party services. Qumulo CNQ runs IN the clouds but is not a cloud-provider-branded service. For Fortune 500 procurement that matters.'],
+      ['Block + file + object, one platform',
+       'ONTAP unifies SAN and NAS. Qumulo is file (and increasingly file+object). Enterprises consolidating storage vendors sometimes pick NetApp purely on protocol breadth.'],
+      ['Scale of company, channel, balance sheet',
+       'NetApp is a $6B+ revenue public company with 12,000+ employees and 100+ countries of channel coverage. Qumulo is a $103M ARR private. In RFPs that go to procurement, this asymmetry is real.'],
+      ['Ransomware guarantee + mature data services',
+       'SnapMirror, SnapCenter, FlexCache, Ransomware Resilience Service with $$$ guarantee — decades-deep data-protection feature surface that Qumulo is still building parity on.']
+    ]
+  },
+
+  {
+    id: 'pure',
+    name: 'Pure Storage',
+    tag: 'FlashBlade · FlashBlade//EXA',
+    snip: 'All-flash unified file + object. New FlashBlade//EXA disaggregated for AI. Custom DirectFlash Modules.',
+    qumulo: [
+      ['Hybrid-cloud native, not appliance-locked',
+       'Pure is fundamentally hardware: FlashBlade chassis + custom DFM modules. Qumulo is software that runs on Pure-class hardware on-prem AND natively in the cloud. The cloud half doesn\'t exist at Pure with the same depth.'],
+      ['Capacity economics at scale',
+       'Pure\'s all-flash answer means PB-scale media/archive workloads are expensive. Qumulo can mix flash and capacity tiers in one namespace; Frozen tier and Object Accelerator pull cold data off flash entirely.'],
+      ['Scale-out without blade-chassis constraints',
+       'FlashBlade tops out at 15 blades per chassis; multi-chassis grows by appliance, not linearly. Qumulo scales out one node at a time, mixing node types in a cluster.'],
+      ['Workflow-fit in M&E and federal',
+       'Pure is strong in enterprise general-purpose unstructured; Qumulo wins specifically in studios, post-production, genomics workflows where the storage IS the production tool.']
+    ],
+    them: [
+      ['All-flash performance for AI training',
+       'FlashBlade//EXA is purpose-built for AI training — disaggregated like VAST/AFX, all-flash, fast small-file metadata. Qumulo on flash performs well, but Pure\'s positioning here is sharper.'],
+      ['DirectFlash custom hardware advantage',
+       'Pure ships custom DFM SSDs with higher density and a different write/cache architecture — the Meta sale of DFMs to hyperscalers is proof of differentiated silicon. Qumulo runs on commodity drives.'],
+      ['Strong brand and enterprise channel',
+       'Pure is public ($3B+ revenue), Gartner Leader, recognized brand in enterprise storage RFPs. Qumulo enters the same RFPs with a smaller logo.'],
+      ['Evergreen Storage subscription model',
+       'Pure\'s Evergreen subscription (controller upgrades included) reframes enterprise storage CapEx as OpEx and gets long renewal cycles. Mature commercial motion.'],
+      ['Pure1 management + AIOps maturity',
+       'Pure1 telemetry platform has a decade of head-start in fleet management and predictive support. Qumulo Cloud Manager is comparable on individual cluster ops but newer on fleet AIOps.']
+    ]
+  },
+
+  {
+    id: 'powerscale',
+    name: 'Dell PowerScale',
+    tag: 'Isilon · OneFS · Project Lightning',
+    snip: 'The unstructured NAS incumbent. OneFS scale-out, S3 multi-protocol, Project Lightning parallel file system.',
+    qumulo: [
+      ['Built modern, no Isilon legacy',
+       'OneFS dates to ~2003. Qumulo built scale-out file from a clean architectural slate, including modern erasure coding, real-time analytics, and proper cloud-native deployment. PowerScale\'s software has decades of "carry weight" from legacy.'],
+      ['Genuine cloud-native architecture',
+       'CNQ runs as a true cloud-native service on hyperscaler object substrate. PowerScale\'s cloud story is "PowerScale in the cloud" — VM-based, not native economics. Different curve.'],
+      ['Real-time visibility into every byte',
+       'Qumulo\'s real-time analytics (who, what, when, how much) over the entire namespace is a defining product trait. PowerScale InsightIQ is the comparable surface and operates on a different time-resolution.'],
+      ['Hardware-agnostic',
+       'Qumulo runs on a wider hardware ecosystem (Supermicro, HPE, Dell, Cisco UCS) and is moving to ARM and DPU. PowerScale ties more tightly to Dell hardware in practice, locking refreshes and pricing.'],
+      ['Workflow displacement wins',
+       'Multiple media, federal, and life-sciences customers (incl. some named-Disney-class M&E and federal logos) migrated from Isilon to Qumulo specifically because cluster expansion stalled or refresh costs blew out.']
+    ],
+    them: [
+      ['Installed base + Dell channel',
+       'PowerScale is the #1 unstructured NAS by install base. Dell\'s direct sales force, 200,000+ enterprise customers, and PowerEdge attach make displacement a fight every time, not a default.'],
+      ['Project Lightning + AIDP',
+       'Dell\'s Lightning File System (LFS), pNFS PowerScale, and ObjectScale running on PowerEdge with NVIDIA reference architectures put Dell credibly inside AI infrastructure RFPs. Qumulo competes against the bundle, not the box.'],
+      ['Multi-protocol with deep S3 + HDFS',
+       'OneFS has had production S3 + HDFS protocol heads for years. PowerScale claims cross-protocol access that is uniquely deep among the file vendors.'],
+      ['Hybrid node types in one cluster',
+       'PowerScale\'s ability to mix all-flash, hybrid, all-HDD node types in a single cluster is uniquely flexible — single namespace from hot to cold without external tiering. Qumulo addresses this with Frozen and Object Accelerator but as separate products.'],
+      ['Dell Apex + service bundle',
+       'Dell can bundle PowerScale into Apex consumption + PowerEdge + networking + services as a single deal. Procurement bias goes to the bundle.']
+    ]
+  },
+
+  {
+    id: 'vast',
+    name: 'VAST Data',
+    tag: 'DASE · InsightEngine · AI OS',
+    snip: '$30B valuation. Disaggregated all-flash AI OS. Cisco AI Factory storage horse. AIDP InsightEngine.',
+    qumulo: [
+      ['File-first, with deep multi-protocol heritage',
+       'Qumulo is fundamentally a file system with strong NFS/SMB semantics that workflow-oriented customers depend on. VAST grew up as a parallel system optimized for AI training — for Adobe-Premiere-style edit workflows, surveillance, PACS, the protocol fit is materially different.'],
+      ['76% lower COGS per 10PB in cloud (per Amazon Studios benchmark)',
+       'CNQ cloud-native architecture lets capacity workloads live on cloud object underneath the namespace. VAST is all-flash on appliance hardware. For large warm/cold datasets the TCO gap is significant.'],
+      ['Sovereign / distributed / edge story',
+       'Cloud Data Fabric extends a single namespace across federal, sovereign, and edge environments natively. VAST DataSpace spans similar geometry but the appliance model makes truly distributed edge deployments harder.'],
+      ['Provenance + versioning as governance',
+       'The Refinery writes lineage into file xattrs — eligibility-at-access for AI training data. VAST has governance via InsightEngine but it sits in the platform, not bound to the byte.'],
+      ['Customer concentration profile',
+       'Qumulo\'s historic strength in M&E, federal, life sciences gives workflow depth in segments where VAST is a newer entrant. For workflow-bound RFPs the incumbency advantage is real.']
+    ],
+    them: [
+      ['Storage horse for Cisco Secure AI Factory',
+       'VAST InsightEngine is named in the Cisco-NVIDIA AI Factory architecture (Sept 2025). When a Fortune 500 buys an "AI Factory" SKU through Cisco, VAST is in the bundle by default. Qumulo is on Cisco UCS but in a different slot.'],
+      ['Deeper NVIDIA partnership',
+       'AIDP InsightEngine integration, AgentEngine, multiple Boitano keynote slots, xAI / CoreWeave / Mistral / US Air Force as customers. Qumulo does not yet have a GDS cert or AIDP slot.'],
+      ['DASE architecture for AI training scale',
+       'Disaggregated Shared-Everything was the right architecture for AI training before everyone else got there. Scales to exabytes of all-flash with consistent metadata. Hard to beat on raw training throughput.'],
+      ['Single unified system: file + object + block + vector + DB',
+       'VAST DataStore + DataBase + DataSpace + DataEngine + InsightEngine all in one. Qumulo is file-first and adds object/analytics through integration rather than native unification.'],
+      ['Brand momentum + $30B valuation',
+       'Series F at $30B in 2026, AI-narrative coverage, partner gravity. In RFPs where "the AI data company" matters, VAST has captured that label more effectively.']
+    ]
+  },
+
+  {
+    id: 'weka',
+    name: 'WEKA',
+    tag: 'NeuralMesh · Augmented Memory Grid',
+    snip: 'Parallel file system rearchitected as containerized microservices. AI training throughput specialist.',
+    qumulo: [
+      ['General-purpose file workloads, not just AI training',
+       'WEKA\'s sweet spot is feeding GPU training pipelines at maximum GB/s. Qumulo handles those workloads but also runs the media editorial, the PACS retrieval, the surveillance ingest — the daily work that\'s not training.'],
+      ['Lower-touch deployment',
+       'WEKA requires careful Mellanox / NVIDIA OFED driver alignment, dual-homed networking, BIOS tuning. Qumulo deploys with much less networking specialization. Matters for non-HPC IT teams.'],
+      ['Capacity tier in the same namespace',
+       'WEKA is flash-tier focused with snapshots + tiering bolted on. Qumulo holds hot, warm, cold (Frozen) and object-tiered data in one namespace natively.'],
+      ['Better fit for sovereign / regulated / distributed',
+       'WEKA was built for performance-dense clusters. Qumulo runs comfortably in federal, sovereign, and edge contexts where the operating profile is different.'],
+      ['Snapshots, replication, governance maturity',
+       'Enterprise data-management features (snapshots, replication, audit, role-based access) are deeper in Qumulo than in WEKA, which is still building enterprise-grade data services out of an HPC heritage.']
+    ],
+    them: [
+      ['Raw GB/s for AI training and HPC',
+       'WEKA NeuralMesh is engineered for the GPU pipeline. On pure training throughput at small file sizes with parallel I/O, WEKA outperforms general-purpose NAS — including Qumulo at the high end.'],
+      ['Augmented Memory Grid for KV cache',
+       'WEKA has shipped a software-defined memory co-located with GPUs that triples inference output. Qumulo does not yet have a comparable KV-cache extension story.'],
+      ['NeuralMesh: containerized + cloud-burstable',
+       'The rearchitecture into containerized microservices lets WEKA burst from on-prem into cloud GPU pools elastically. Qumulo CNQ is cloud-native but doesn\'t flex into ephemeral cloud quite the same way.'],
+      ['Strong AI lab and CSP customer list',
+       'Stability AI, Nebius, neocloud GPU providers — WEKA owns the AI lab + neocloud segment. Different buyer profile than Qumulo\'s enterprise + federal base, but a buyer profile that\'s growing fast.'],
+      ['GPUDirect Storage certified, NVIDIA-certified',
+       'Already through GDS certification and NVIDIA-Certified Storage. Qumulo is not (as of current public posture). For NVIDIA-bundled deals this is table-stakes Qumulo doesn\'t yet meet.']
+    ]
+  },
+
+  {
+    id: 'hammerspace',
+    name: 'Hammerspace',
+    tag: 'Hyperscale NAS · Tier 0 · pNFS',
+    snip: 'Global data orchestration over commodity. pNFS-based hyperscale NAS. Tier 0 uses GPU-local NVMe as shared.',
+    qumulo: [
+      ['Qumulo IS the storage, not a layer on top of it',
+       'Hammerspace is data orchestration that sits over existing storage — including potentially over Qumulo. That\'s a different value proposition: Hammerspace is software-defined orchestration; Qumulo is the actual high-performance data platform with the bytes.'],
+      ['Real performance from purpose-built storage',
+       'Hammerspace orchestrates whatever storage is underneath, which means performance is bounded by the underlying systems. Qumulo delivers performance from its own filesystem at scale, not from a layer over commodity Linux servers.'],
+      ['Data services integrated, not "via underlying storage"',
+       'Snapshots, replication, ransomware protection, quotas — these live in Qumulo Core. In Hammerspace these come either from the underlying storage or partially through their layer; the boundaries are blurry.'],
+      ['Workflow + protocol depth',
+       'Qumulo\'s SMB and NFS implementations are battle-tested in media editorial, post-production, surveillance ingest. Hammerspace\'s pNFS is fast but pNFS adoption in those workflows is shallower.'],
+      ['One commercial relationship, one throat to choke',
+       'Hammerspace deployments often involve multiple underlying storage vendors AND Hammerspace — meaning multiple support contracts, multiple roadmaps. Qumulo is one vendor end-to-end.']
+    ],
+    them: [
+      ['Global namespace over any storage',
+       'Hammerspace\'s key bet is "use any storage, we unify it." If a customer has Pure + NetApp + cloud + commodity, Hammerspace abstracts them into one namespace. Qumulo can\'t do that — you have to BE Qumulo.'],
+      ['Tier 0: GPU server NVMe as shared storage',
+       'Hammerspace Tier 0 turns local GPU NVMe into a shared tier — 10x faster than networked storage for AI checkpointing. Qumulo doesn\'t have an equivalent product.'],
+      ['Software-only, hardware-flexible',
+       'Customers can mix commodity Linux servers, white-box hardware, existing investments. Hammerspace doesn\'t care what\'s underneath. Qumulo prefers (though doesn\'t require) certified hardware.'],
+      ['AIDP partner + NVIDIA momentum',
+       'Hammerspace is in NVIDIA\'s AIDP reference designs, partners with Jason Hardy\'s storage tech org, and has been a notable AI infrastructure story. Qumulo is not in AIDP yet.'],
+      ['$100M Series B + Altimeter backing',
+       'Funded specifically as an AI infrastructure play with public-storage-investor pattern matching. Capital to spend on enterprise GTM.']
+    ]
+  },
+
+  {
+    id: 'ddn',
+    name: 'DDN',
+    tag: 'EXAScaler · Infinia · Inferno · xFusionAI',
+    snip: 'HPC pedigree. Lustre-based EXAScaler + Infinia object/KV. xAI Colossus customer. 700k GPUs supported.',
+    qumulo: [
+      ['Built for general-purpose enterprise, not HPC labs',
+       'DDN\'s heritage is supercomputing centers and weapons labs. Operating model, support model, and software complexity reflect that. Qumulo runs in enterprise IT shops without an HPC team.'],
+      ['Software-defined, cloud-native, hyperscaler-economic',
+       'CNQ runs natively in AWS / Azure / OCI as cloud-native. DDN is fundamentally appliance-centric — Infinia 2.x is software but the GTM and deployment patterns remain HPC-flavored.'],
+      ['Single product line, not two architectures',
+       'DDN runs two distinct architectures (EXAScaler Lustre + Infinia object) and is wiring them together with xFusionAI. Customers buy and operate two stacks. Qumulo is one stack.'],
+      ['Workflow fit for media, federal, life sciences',
+       'Qumulo\'s commercial install base in M&E, federal civilian, and biotech is broader than DDN\'s. DDN wins big AI labs and HPC; Qumulo wins the rest of the enterprise unstructured market.'],
+      ['File + object in one namespace today',
+       'Qumulo\'s Object Accelerator already brings file and object together. Infinia doesn\'t support file protocols natively yet (S3-first); EXAScaler is Lustre. Customers waiting on the unification get it from Qumulo today.']
+    ],
+    them: [
+      ['HPC pedigree + AI-lab credibility',
+       'xAI Colossus (200k → 1M GPU plan), 4,000+ AI customers, the supercomputing heritage. When the buyer is the AI research team, not enterprise IT, DDN has a credibility lead.'],
+      ['SSD-shortage resilience via tiering',
+       'DDN EXA and Infinia run full GPU performance across mixed SSD + HDD tiers — explicitly positioned as protection against the global NAND shortage. Up to 70% AI infrastructure cost reduction claimed.'],
+      ['KV cache acceleration story',
+       'Infinia with Inferno (Spectrum-X + BlueField-4) is positioned at the CMX/STX tier of NVIDIA\'s new KV cache architecture. 27x AI inference speed-up claim. Qumulo has no equivalent KV cache product.'],
+      ['Blackstone $300M growth investment',
+       'Capital, focus, and a public mandate to scale into the enterprise AI segment. Hiring +20% and a real GTM motion. Qumulo competes against a well-resourced incumbent on AI-storage narrative.'],
+      ['100PB in a single rack',
+       'Power and density story matters in modern AI DCs. DDN claims 10x power and cooling savings. Qumulo\'s ARM/DPU work addresses this but DDN is further along on the headline number.']
+    ]
+  },
+
+  {
+    id: 'nasuni',
+    name: 'Nasuni',
+    tag: 'Cloud-native global file · UniFS',
+    snip: 'SaaS global file system for distributed enterprise. Object-backed file storage with edge caches.',
+    qumulo: [
+      ['Real performance for real workloads',
+       'Nasuni\'s architecture (object backend with caching at edge) is built for distributed-collaboration file sharing — not for ingest-heavy GPU pipelines, media editorial, or PACS retrieval. Qumulo handles the demanding tier Nasuni structurally cannot.'],
+      ['One namespace AND one consistency model',
+       'Nasuni relies on edge caches with eventual consistency for some operations. Qumulo provides strong consistency across the namespace, which matters for collaborative editing, transactional workloads, and AI training data freshness.'],
+      ['Scale-out of an active file system, not a cache layer',
+       'Qumulo nodes are real distributed filesystem nodes. Nasuni "filers" are caches in front of cloud object storage. Different fundamental architectures with different ceilings.'],
+      ['Hybrid AND cloud-native, not just cloud-backed',
+       'Qumulo runs on-prem AS a primary system OR cloud-native; Nasuni is fundamentally cloud-backed with edge caches. For customers wanting an on-prem primary tier, Qumulo is the better fit.'],
+      ['AI/Refinery layer',
+       'Nasuni doesn\'t have a counterpart to The Refinery — file-resident AI metadata, vector embeddings, lineage. Qumulo is moving up the stack into semantic data services Nasuni doesn\'t play in.']
+    ],
+    them: [
+      ['Best-in-class distributed file collaboration',
+       'For "150 offices around the world all need the same file shares with ransomware protection," Nasuni is hard to beat. Their GTM and product fit for distributed enterprise file collaboration is genuinely category-leading.'],
+      ['Lower-touch operating model',
+       'Nasuni is operationally simpler for the distributed-office use case — no nodes to manage at branch sites, just filers and cloud. Qumulo can do this but with more operational involvement.'],
+      ['Ransomware protection as a category-defining message',
+       'Nasuni\'s "ransomware recovery in minutes via versioned object" message has been hammered for years and lands consistently with CIOs. Qumulo has NeuralProtect but the message arrived later.'],
+      ['Vertical strength in construction, professional services, retail',
+       'Nasuni has carved a strong base in industries Qumulo doesn\'t target. Different buyer, different solution selling motion, less competitive overlap than the AI-narrative incumbents.'],
+      ['Pure cloud-economic model',
+       'Nasuni\'s pricing is "your data in cheap cloud object + our software fee" — appeals to CIOs trying to escape appliance refresh cycles. Pure OpEx, no hardware.']
+    ]
+  },
+
+  {
+    id: 'quantum',
+    name: 'Quantum',
+    tag: 'StorNext · ActiveScale · Myriad',
+    snip: 'StorNext file system. ActiveScale object. Strong in M&E + surveillance + archive workflows.',
+    qumulo: [
+      ['Software-defined, hardware-flexible',
+       'Quantum\'s StorNext is heritage-coupled to specific hardware patterns; Qumulo runs on broad commercial hardware AND in the cloud natively. Customers refreshing Quantum often go to Qumulo specifically for the hardware-agnostic story.'],
+      ['Cloud-native, not just cloud-tiered',
+       'Quantum has cloud tiering options but no true cloud-native primary tier. CNQ runs as a first-class cloud service. For studios going cloud-native, the gap is large.'],
+      ['Real-time analytics + Cloud Data Fabric',
+       'Per-byte visibility, replication across continents, federated namespace. Quantum\'s observability and namespace federation are thinner.'],
+      ['Continued investment vs. financial drag',
+       'Quantum has been working through financial restructuring and missed SEC filings; product-roadmap velocity is constrained. Qumulo has more headroom to invest forward.'],
+      ['NeuralProtect + ransomware story',
+       'Qumulo\'s NeuralProtect (with the eye-popping detection numbers) targets the same M&E and post-production base Quantum serves; product is more contemporary.']
+    ],
+    them: [
+      ['StorNext for M&E + post-production',
+       'StorNext has decades of incumbency in studios, post-production houses, and broadcast. The workflow integration with Avid, DaVinci, and editorial pipelines is deeper than any newer entrant\'s.'],
+      ['Tape + archive economics',
+       'Quantum\'s Scalar tape libraries are core to LTO-based archive economics — the lowest cost-per-TB-per-year of any medium. For petabyte archives Quantum is still the default. Qumulo Frozen approaches this but on object, not tape.'],
+      ['ActiveScale for object storage at media scale',
+       'ActiveScale (originally HGST) is mature object storage with strong erasure coding economics. Qumulo Object Accelerator tiers TO object stores but doesn\'t replace one.'],
+      ['Surveillance and video-management ecosystem',
+       'Strong relationships with VMS vendors (Genetec, Milestone, Bosch) and physical-security integrators. A vertical Qumulo plays in but doesn\'t dominate.'],
+      ['End-to-end media supply-chain story',
+       'Capture → edit → archive → distribute on one vendor stack. Qumulo competes on edit / archive but doesn\'t cover capture-side workflows the way Quantum does.']
+    ]
+  },
+
+  {
+    id: 'cohesity',
+    name: 'Cohesity',
+    tag: 'NetBackup · Gaia · DataProtect',
+    snip: 'Backup primary use. NetBackup acquisition. Gaia AI assistant. Cisco AI Factory backup partner.',
+    qumulo: [
+      ['Primary data, not just backup',
+       'Cohesity\'s job is to be a copy of production data. Qumulo IS production data. Different problem entirely. The overlap is only where Cohesity tries to use backup data for AI inference or analytics.'],
+      ['Real-time performance for active workloads',
+       'Cohesity is optimized for write-once-read-occasionally backup operations. Qumulo serves edit-bay traffic, GPU pipelines, real-time analytics — different ceiling on performance.'],
+      ['Native file + object production semantics',
+       'NFS/SMB semantics in Cohesity exist for backup use cases. In Qumulo they are first-class production protocols with the full feature set workflows depend on.'],
+      ['Doesn\'t depend on production storage existing',
+       'Cohesity is by definition a secondary. Qumulo can be the only data plane the customer needs for unstructured data. Some customers want one fewer vendor in the stack.'],
+      ['No conflict with backup vendors',
+       'Qumulo sells alongside Cohesity / Rubrik / Veeam without overlap. Cohesity\'s pivot toward AI inference of backup data creates a positioning question: are you a backup company or a data platform? Qumulo doesn\'t have that ambiguity.']
+    ],
+    them: [
+      ['Backup market dominance + NetBackup',
+       'Post-NetBackup acquisition, Cohesity is the largest backup vendor by some measures. CIOs already buying Cohesity have a procurement relationship to leverage for AI initiatives.'],
+      ['Cisco AI Factory bundle (backup slot)',
+       'Cohesity is the backup slot in Cisco Secure AI Factory with NVIDIA (alongside VAST for AI data). When Cisco sells the bundle, Cohesity rides along. Qumulo is on UCS but in a different conversation.'],
+      ['Gaia + AIDP integration',
+       'Gaia AI assistant indexes Cohesity backup data and serves it through NIM / NeMo Retriever, integrated with the NVIDIA AIDP stack. AI search of historical data — a story Cohesity is selling hard.'],
+      ['Air-gapped + cyber-resilience messaging',
+       'For ransomware-anxious CIOs, Cohesity\'s immutable / air-gapped messaging is dominant. Qumulo\'s NeuralProtect is good but newer to the message.'],
+      ['Different buyer (security + IT ops, not data + AI)',
+       'Cohesity\'s buyer is often the CISO or IT ops lead — different from Qumulo\'s data architect / media VP / federal CIO buyer. Less competition than you\'d think, but more wallet share in target accounts.']
+    ]
+  },
+
+  {
+    id: 'cloudian',
+    name: 'Cloudian',
+    tag: 'HyperStore · GDS for Object',
+    snip: 'Pure S3 object storage. First GPUDirect Storage for object. NVIDIA AIDP partner.',
+    qumulo: [
+      ['File + object, not just object',
+       'Cloudian is pure object. Workflows that need file protocols (NFS/SMB) — which is most production unstructured workflows — need a file system in front of Cloudian. Qumulo does both natively.'],
+      ['Real distributed file system semantics',
+       'Strong consistency, posix semantics, locking — things you need for editorial, transactional, and structured workloads. Object storage has different consistency and access patterns.'],
+      ['Hybrid + cloud-native, not just on-prem',
+       'Qumulo runs natively in AWS, Azure, OCI. Cloudian HyperStore deploys to clouds via VMs but it isn\'t a cloud-native service the way CNQ is.'],
+      ['Same workflow, same vendor',
+       'A customer running Cloudian for object plus a Qumulo competitor for file has two data planes to manage. Qumulo plus Object Accelerator collapses this.'],
+      ['Stronger commercial momentum at enterprise',
+       'Qumulo has $103M ARR with strong renewals (FY26 renewals significantly above plan). Cloudian commercial momentum is less public; their AI narrative is loud but enterprise ARR less so.']
+    ],
+    them: [
+      ['First GPUDirect Storage for object',
+       'Cloudian shipped GDS-for-object before anyone. NVIDIA-Certified Foundation tier (March 2025). For the segment that wants object + GPU-native acceleration, Cloudian is the answer.'],
+      ['Deepest AIDP integration of any object vendor',
+       'AIDP reference design partner, STX launch partner, NPN member, Lenovo + Supermicro reference architectures. Stacked NVIDIA partnerships Qumulo would need a Cloudian-class acquisition to match.'],
+      ['Pure S3 economics + scale',
+       'For pure object storage at petabyte to exabyte scale, S3-native economics are hard to beat — and Cloudian\'s erasure coding + low TCO claim of "third of the cost of non-GDS systems" is real.'],
+      ['Software-defined, vendor-neutral hardware',
+       'HyperStore deploys on commodity x86 + a wide range of certified hardware. Strong fit for buyers who don\'t want vendor-locked appliances.'],
+      ['Object as the AI data lake substrate',
+       'NVIDIA\'s AIDP narrative places object storage as the data lake under file. If that\'s where the industry settles, Cloudian is positioned where Qumulo currently isn\'t.']
+    ]
+  }
+];
+
+// ─── Render competitor grid ──────────────────────────
+const grid = document.getElementById('comp-grid');
+COMPETITORS.forEach(c => {
+  const card = document.createElement('div');
+  card.className = 'comp-card';
+  card.dataset.id = c.id;
+  card.innerHTML = `
+    <div class="comp-tag">${c.tag}</div>
+    <h5>${c.name}</h5>
+    <div class="comp-snip">${c.snip}</div>
+  `;
+  card.addEventListener('click', () => loadCompetitor(c.id));
+  grid.appendChild(card);
+});
+
+// ─── Comparison panel logic ──────────────────────────
+let currentTab = 'qumulo';
+let currentCompetitor = null;
+
+document.querySelectorAll('.tab').forEach(t => {
+  t.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    currentTab = t.dataset.tab;
+    if (currentCompetitor) renderBody();
+  });
+});
+
+function loadCompetitor(id) {
+  const c = COMPETITORS.find(x => x.id === id);
+  if (!c) return;
+  currentCompetitor = c;
+
+  // Update card active state
+  document.querySelectorAll('.comp-card').forEach(card => {
+    card.classList.toggle('active', card.dataset.id === id);
+  });
+
+  // Update header
+  document.getElementById('panel-eyebrow').textContent = c.tag;
+  document.getElementById('panel-title').textContent = `Qumulo · vs · ${c.name}`;
+  document.getElementById('panel-meta').textContent = c.snip;
+  renderBody();
+}
+
+function renderBody() {
+  const body = document.getElementById('panel-body');
+  const points = currentTab === 'qumulo' ? currentCompetitor.qumulo : currentCompetitor.them;
+  body.classList.remove('fade-in');
+  void body.offsetWidth; // restart animation
+  body.classList.add('fade-in');
+  body.innerHTML = points.map(([title, desc]) => `
+    <div class="point">
+      <h6>${title}</h6>
+      <p>${desc}</p>
+    </div>
+  `).join('');
+}
+
+// Default-load NetApp on first visit
+loadCompetitor('netapp');
+</script>
+
+</body>
+</html>
